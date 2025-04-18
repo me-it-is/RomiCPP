@@ -13,7 +13,7 @@ RotateAngle::RotateAngle(RomiDrivetrain* subsystem, units::radian_t angleToRotat
 }
 
 void RotateAngle::Initialize() {
-  (*m_subsystem).ResetEncodersAndGyro();
+  (*m_subsystem).ResetAllComponents();
 }
 
 void RotateAngle::Execute() {

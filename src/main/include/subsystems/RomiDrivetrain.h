@@ -13,10 +13,12 @@
 #include "frc/kinematics/DifferentialDriveKinematics.h"
 #include "frc/drive/DifferentialDrive.h"
 #include "frc/geometry/Rotation2d.h"
+#include <frc/geometry/Pose2d.h>
 #include "units/base.h"
 #include "units/length.h"
 #include "units/time.h"
 #include "units/velocity.h"
+#include <frc/kinematics/DifferentialDriveOdometry.h>
 
 class RomiDrivetrain : public frc2::SubsystemBase {
  public:
@@ -37,7 +39,14 @@ class RomiDrivetrain : public frc2::SubsystemBase {
 
   void ArcadeDrive(double xaxisSpeed, double zaxisRotate);
 
-  void ResetEncodersAndGyro();
+  void ResetAllComponents();
+
+  frc::Pose2d GetPose();
+
+  /**
+   * Will be called periodically whenever the CommandScheduler runs.
+   */
+  void Periodic() override;
 
  private:
   frc::Spark leftSpark{0};
@@ -48,4 +57,7 @@ class RomiDrivetrain : public frc2::SubsystemBase {
   frc::RomiGyro gyro{};
   frc::DifferentialDrive diffDrive{leftSpark, rightSpark};
   frc::DifferentialDriveKinematics kinematics{149_mm};
+  frc::DifferentialDriveOdometry odometry{frc::Rotation2d{}, 0_m, 0_m, frc::Pose2d{}};
+
+  frc::Pose2d currentPose;
 };
