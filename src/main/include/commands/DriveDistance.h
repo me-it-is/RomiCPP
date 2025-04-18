@@ -7,6 +7,7 @@
 #include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 #include <frc/Joystick.h>
+#include <frc/controller/PIDController.h>
 
 #include "subsystems/RomiDrivetrain.h"
 #include "units/length.h"
@@ -26,7 +27,7 @@ class DriveDistance
    *
    * @param subsystem The subsystem used by this command.
    */
-  explicit DriveDistance(RomiDrivetrain* subsystem, units::meter_t distToDrive, int dir);
+  explicit DriveDistance(RomiDrivetrain* subsystem, units::meter_t distToDrive, int dir, frc::PIDController* PIDController);
 
   void Initialize() override;
 
@@ -38,4 +39,5 @@ class DriveDistance
   RomiDrivetrain* m_subsystem;
   units::meter_t m_distance;
   int dir;
+  frc::PIDController* controller;
 };

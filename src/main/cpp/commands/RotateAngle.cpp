@@ -5,8 +5,9 @@
 #include "commands/RotateAngle.h"
 #include "units/angle.h"
 
-RotateAngle::RotateAngle(RomiDrivetrain* subsystem, units::radian_t angleToRotate, int dir)
-    : m_subsystem{subsystem}, m_angle{angleToRotate}, dir{dir} {
+RotateAngle::RotateAngle(RomiDrivetrain* subsystem, units::radian_t angleToRotate, int dir, frc::PIDController* PIDController)
+    : m_subsystem{subsystem}, m_angle{angleToRotate}, dir{dir}, controller{PIDController} {
+  (*controller).SetSetpoint(m_angle.value());
   // Register that this command requires the subsystem.
   AddRequirements(m_subsystem);
 }
@@ -16,9 +17,10 @@ void RotateAngle::Initialize() {
 }
 
 void RotateAngle::Execute() {
+  double output = (*controller).Calculate((*m_subsystem).GetAngle().value());
   (*m_subsystem).ArcadeDrive(0, dir);
 }
 
 bool RotateAngle::IsFinished() {
-  return (*m_subsystem).GetAngle() < m_angle * dir;
+  return (*controller).AtSetpoint();
 }
