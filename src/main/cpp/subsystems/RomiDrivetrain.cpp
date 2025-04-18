@@ -9,7 +9,14 @@
 #include "units/length.h"
 #include "units/time.h"
 #include "frc/geometry/Rotation2d.h"
+#include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/config/RobotConfig.h>
+#include <pathplanner/lib/controllers/PPLTVController.h>
+#include <frc/geometry/Pose2d.h>
+#include <frc/kinematics/ChassisSpeeds.h>
+#include <frc/DriverStation.h>
 
+using namespace pathplanner;
 using namespace frc;
 using namespace units;
 
@@ -20,6 +27,8 @@ RomiDrivetrain::RomiDrivetrain() {
   rightSpark.SetInverted(true);
 
   ResetAllComponents();
+
+  RobotConfig config = RobotConfig::fromGUISettings();
 }
 
 radian_t RomiDrivetrain::GetAngle() {
