@@ -20,6 +20,9 @@
 #include "units/velocity.h"
 #include <frc/kinematics/DifferentialDriveOdometry.h>
 
+using meter_t = units::meter_t;
+using meters_per_second_t = units::meters_per_second_t;
+
 class RomiDrivetrain : public frc2::SubsystemBase {
  public:
   RomiDrivetrain();
@@ -30,12 +33,12 @@ class RomiDrivetrain : public frc2::SubsystemBase {
   units::radian_t GetAngle();
   frc::Rotation2d GetRot2d();
 
-  units::meter_t GetLeftDist();
-  units::meter_t GetRightDist();
-  units::meter_t GetAveDist();
-  units::meters_per_second_t GetLeftSpeed();
-  units::meters_per_second_t GetRightSpeed();
-  units::meters_per_second_t GetAveSpeed();
+  meter_t GetLeftDist();
+  meter_t GetRightDist();
+  meter_t GetAveDist();
+  meters_per_second_t GetLeftSpeed();
+  meters_per_second_t GetRightSpeed();
+  meters_per_second_t GetAveSpeed();
 
   void ArcadeDrive(double xaxisSpeed, double zaxisRotate);
 

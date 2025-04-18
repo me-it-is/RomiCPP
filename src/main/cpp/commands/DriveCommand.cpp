@@ -6,7 +6,10 @@
 #include <frc/Joystick.h>
 #include "units/length.h"
 
-DriveCommand::DriveCommand(RomiDrivetrain* subsystem, frc::Joystick* joystick)
+using namespace frc;
+using namespace units;
+
+DriveCommand::DriveCommand(RomiDrivetrain* subsystem, Joystick* joystick)
     : m_subsystem{subsystem}, m_joystick{joystick} {
   // Register that this command requires the subsystem.
   AddRequirements(m_subsystem);

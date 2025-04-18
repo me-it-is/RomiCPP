@@ -12,6 +12,9 @@
 #include "commands/DriveDistance.h"
 #include "commands/RotateAngle.h"
 
+using namespace frc;
+using namespace units;
+
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
 

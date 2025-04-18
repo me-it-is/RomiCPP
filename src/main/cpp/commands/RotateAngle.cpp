@@ -5,7 +5,10 @@
 #include "commands/RotateAngle.h"
 #include "units/angle.h"
 
-RotateAngle::RotateAngle(RomiDrivetrain* subsystem, units::radian_t angleToRotate, int dir, frc::PIDController* PIDController)
+using namespace frc;
+using namespace units;
+
+RotateAngle::RotateAngle(RomiDrivetrain* subsystem, radian_t angleToRotate, int dir, PIDController* PIDController)
     : m_subsystem{subsystem}, m_angle{angleToRotate}, dir{dir}, controller{PIDController} {
   (*controller).SetSetpoint(m_angle.value());
   // Register that this command requires the subsystem.

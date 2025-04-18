@@ -13,8 +13,6 @@
 #include "commands/DriveDistance.h"
 #include "commands/RotateAngle.h"
 
-using namespace DrivetrainConstants;
-
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -33,8 +31,8 @@ class RobotContainer {
   // The robot's subsystems are defined here...
   RomiDrivetrain m_subsystem;
 
-  frc::PIDController translationController{kTranslationP, kTranslationI, kTranslationD};
-  frc::PIDController rotationController{kRotationP, kRotationI, kRotationD};
+  frc::PIDController translationController{DrivetrainConstants::kTranslationP, DrivetrainConstants::kTranslationI, DrivetrainConstants::kTranslationD};
+  frc::PIDController rotationController{DrivetrainConstants::kRotationP, DrivetrainConstants::kRotationI, DrivetrainConstants::kRotationD};
 
   DriveCommand driveCommand{&m_subsystem, &m_rightJoystick};
   DriveDistance driveDistance{&m_subsystem, 1_m, 1, &translationController};
