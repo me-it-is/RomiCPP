@@ -26,4 +26,12 @@ inline constexpr double kCountsPerRevolution = 1440.0;
 inline constexpr units::meter_t kWheelDiameter = 0.07_m;
 inline constexpr units::meter_t kDistPerPulse = kWheelDiameter * (M_PI / kCountsPerRevolution);
 inline constexpr double kDistPerPulseDouble = kDistPerPulse.value();
+
+inline constexpr double kTranslationP = 0.1;
+inline constexpr double kTranslationI = 0;
+inline constexpr double kTranslationD = 0.05;
+
+inline constexpr double kRotationP = 0.1;
+inline constexpr double kRotationI = 0;
+inline constexpr double kRotationD = 0.05;
 }

@@ -5,20 +5,22 @@
 #include "commands/DriveDistance.h"
 #include "units/length.h"
 
-DriveDistance::DriveDistance(RomiDrivetrain* subsystem, units::meter_t distToDrive, int dir)
-    : m_subsystem{subsystem}, m_distance{distToDrive}, dir{dir} {
+DriveDistance::DriveDistance(RomiDrivetrain* subsystem, units::meter_t distToDrive, int dir, frc::PIDController* PIDController)
+    : m_subsystem{subsystem}, m_distance{distToDrive}, dir{dir}, controller{PIDController} {
   // Register that this command requires the subsystem.
   AddRequirements(m_subsystem);
 }
 
 void DriveDistance::Initialize() {
   (*m_subsystem).ResetEncodersAndGyro();
+  (*controller).SetSetpoint(m_distance.value());
 }
 
 void DriveDistance::Execute() {
-  (*m_subsystem).ArcadeDrive(dir, 0);
+  double output = (*controller).Calculate((*m_subsystem).GetAveDist().value());
+  (*m_subsystem).ArcadeDrive(output * dir, 0);
 }
 
 bool DriveDistance::IsFinished() {
-  return (*m_subsystem).GetAveDist() < m_distance * dir;
+  return (*controller).AtSetpoint();
 }

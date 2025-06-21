@@ -6,6 +6,7 @@
 
 #include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/controller/PIDController.h>
 
 #include "subsystems/RomiDrivetrain.h"
 #include "units/angle.h"
@@ -25,7 +26,7 @@ class RotateAngle
    *
    * @param subsystem The subsystem used by this command.
    */
-  explicit RotateAngle(RomiDrivetrain* subsystem, units::radian_t angleToRotate, int dir);
+  explicit RotateAngle(RomiDrivetrain* subsystem, units::radian_t angleToRotate, int dir, frc::PIDController* PIDController);
 
   void Initialize() override;
 
@@ -37,4 +38,5 @@ class RotateAngle
   RomiDrivetrain* m_subsystem;
   units::radian_t m_angle;
   int dir;
+  frc::PIDController* controller;
 };
