@@ -15,6 +15,8 @@ RomiDrivetrain::RomiDrivetrain() {
   rightEncoder.SetDistancePerPulse(DrivetrainConstants::kDistPerPulseDouble);
 
   rightSpark.SetInverted(true);
+
+  ResetAllComponents();
 }
 
 units::radian_t RomiDrivetrain::GetAngle() {
@@ -53,8 +55,17 @@ void RomiDrivetrain::ArcadeDrive(double xaxisSpeed, double zaxisRotate) {
   diffDrive.ArcadeDrive(xaxisSpeed, zaxisRotate, true);
 }
 
-void RomiDrivetrain::ResetEncodersAndGyro() {
+void RomiDrivetrain::ResetAllComponents() {
   leftEncoder.Reset();
   rightEncoder.Reset();
   gyro.Reset();
+  odometry.ResetPosition(GetRot2d(), GetLeftDist(), GetRightDist(), frc::Pose2d{});
+}
+
+frc::Pose2d RomiDrivetrain::GetPose() {
+  return currentPose;
+}
+
+void RomiDrivetrain::Periodic() {
+  currentPose = odometry.Update(GetRot2d(), GetLeftDist(), GetRightDist());
 }

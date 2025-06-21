@@ -12,7 +12,7 @@ DriveDistance::DriveDistance(RomiDrivetrain* subsystem, units::meter_t distToDri
 }
 
 void DriveDistance::Initialize() {
-  (*m_subsystem).ResetEncodersAndGyro();
+  (*m_subsystem).ResetAllComponents();
   (*controller).SetSetpoint(m_distance.value());
 }
 
