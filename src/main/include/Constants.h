@@ -4,8 +4,13 @@
 
 #pragma once
 
-#include "units/length.h"
 #include "math.h"
+#include "frc/romi/RomiGyro.h"
+#include "units/base.h"
+#include "units/angular_velocity.h"
+#include "units/length.h"
+#include "units/time.h"
+#include "units/velocity.h"
 
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide
@@ -34,4 +39,7 @@ inline constexpr double kTranslationD = 0.05;
 inline constexpr double kRotationP = 0.1;
 inline constexpr double kRotationI = 0;
 inline constexpr double kRotationD = 0.05;
+
+inline constexpr units::meters_per_second_t kMaxLinearVelocity = 1_mps;
+inline constexpr units::radians_per_second_t kMaxAngularVelocity = 1_rad_per_s;
 }

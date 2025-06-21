@@ -32,6 +32,7 @@ class RomiDrivetrain : public frc2::SubsystemBase {
    */
   units::radian_t GetAngle();
   frc::Rotation2d GetRot2d();
+  units::radians_per_second_t GetAngularVelocity();
 
   meter_t GetLeftDist();
   meter_t GetRightDist();
@@ -41,6 +42,10 @@ class RomiDrivetrain : public frc2::SubsystemBase {
   meters_per_second_t GetAveSpeed();
 
   void ArcadeDrive(double xaxisSpeed, double zaxisRotate);
+
+  void ResetPoseTo(frc::Pose2d pose);
+  frc::ChassisSpeeds GetRobotRelativeSpeeds();
+  void DriveWithChassisSpeeds(frc::ChassisSpeeds speeds);
 
   void ResetAllComponents();
 
