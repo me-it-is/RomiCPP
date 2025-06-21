@@ -10,6 +10,9 @@
 #include "units/time.h"
 #include "frc/geometry/Rotation2d.h"
 
+using namespace frc;
+using namespace units;
+
 RomiDrivetrain::RomiDrivetrain() {
   leftEncoder.SetDistancePerPulse(DrivetrainConstants::kDistPerPulseDouble);
   rightEncoder.SetDistancePerPulse(DrivetrainConstants::kDistPerPulseDouble);
@@ -19,35 +22,35 @@ RomiDrivetrain::RomiDrivetrain() {
   ResetAllComponents();
 }
 
-units::radian_t RomiDrivetrain::GetAngle() {
+radian_t RomiDrivetrain::GetAngle() {
   return gyro.GetAngle();
 }
 
-frc::Rotation2d RomiDrivetrain::GetRot2d() {
-  return frc::Rotation2d{GetAngle()};
+Rotation2d RomiDrivetrain::GetRot2d() {
+  return Rotation2d{GetAngle()};
 }
 
-units::meter_t RomiDrivetrain::GetLeftDist() {
-  return units::length::meter_t(leftEncoder.GetDistance());
+meter_t RomiDrivetrain::GetLeftDist() {
+  return length::meter_t(leftEncoder.GetDistance());
 }
 
-units::meter_t RomiDrivetrain::GetRightDist() {
-  return units::length::meter_t(rightEncoder.GetDistance());
+meter_t RomiDrivetrain::GetRightDist() {
+  return length::meter_t(rightEncoder.GetDistance());
 }
 
-units::meter_t RomiDrivetrain::GetAveDist() {
+meter_t RomiDrivetrain::GetAveDist() {
   return (GetRightDist() + GetLeftDist()) / 2;
 }
 
-units::meters_per_second_t RomiDrivetrain::GetLeftSpeed() {
-  return units::meters_per_second_t(leftEncoder.GetRate());
+meters_per_second_t RomiDrivetrain::GetLeftSpeed() {
+  return meters_per_second_t(leftEncoder.GetRate());
 }
 
-units::meters_per_second_t RomiDrivetrain::GetRightSpeed() {
-  return units::meters_per_second_t(rightEncoder.GetRate());
+meters_per_second_t RomiDrivetrain::GetRightSpeed() {
+  return meters_per_second_t(rightEncoder.GetRate());
 }
 
-units::meters_per_second_t RomiDrivetrain::GetAveSpeed() {
+meters_per_second_t RomiDrivetrain::GetAveSpeed() {
   return (GetRightSpeed() + GetLeftSpeed()) / 2;
 }
 
@@ -59,10 +62,10 @@ void RomiDrivetrain::ResetAllComponents() {
   leftEncoder.Reset();
   rightEncoder.Reset();
   gyro.Reset();
-  odometry.ResetPosition(GetRot2d(), GetLeftDist(), GetRightDist(), frc::Pose2d{});
+  odometry.ResetPosition(GetRot2d(), GetLeftDist(), GetRightDist(), Pose2d{});
 }
 
-frc::Pose2d RomiDrivetrain::GetPose() {
+Pose2d RomiDrivetrain::GetPose() {
   return currentPose;
 }
 

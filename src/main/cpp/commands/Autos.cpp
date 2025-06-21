@@ -8,6 +8,9 @@
 
 #include <commands/DriveCommand.h>
 
+using namespace frc;
+using namespace units;
+
 frc2::CommandPtr autos::ExampleAuto(RomiDrivetrain* subsystem) {
   return frc2::cmd::Sequence();
 }

@@ -5,7 +5,10 @@
 #include "commands/DriveDistance.h"
 #include "units/length.h"
 
-DriveDistance::DriveDistance(RomiDrivetrain* subsystem, units::meter_t distToDrive, int dir, frc::PIDController* PIDController)
+using namespace frc;
+using namespace units;
+
+DriveDistance::DriveDistance(RomiDrivetrain* subsystem, meter_t distToDrive, int dir, PIDController* PIDController)
     : m_subsystem{subsystem}, m_distance{distToDrive}, dir{dir}, controller{PIDController} {
   // Register that this command requires the subsystem.
   AddRequirements(m_subsystem);
