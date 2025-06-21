@@ -5,8 +5,15 @@
 #include "Robot.h"
 
 #include <frc2/command/CommandScheduler.h>
+#include <frc/smartdashboard/SendableChooser.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
-Robot::Robot() {}
+Robot::Robot() {
+  m_chooser.SetDefaultOption(kAutoNames[0],kAutoNames[0]);
+  for (int i = 1; i < kAutoNames.size(); i++) {
+    m_chooser.AddOption(kAutoNames[i], kAutoNames[i]);
+  }
+  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);}
 
 /**
  * This function is called every 20 ms, no matter the mode. Use
